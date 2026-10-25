@@ -1,7 +1,12 @@
 ---
 name: "Клоринда"
+
+author_id:
+
 photo: "/assets/images/persons/clo/portrait.jpeg"
+
 years_at_kgik: "1975–2005"
+
 bio_short: "Краткая биографическая справка: чем известен, что внёс в институт, ключевые работы."
 # works:
 #   - title: "Название книги"

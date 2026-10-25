@@ -1,8 +1,14 @@
 ---
 name: "Арлекино"
+
+author_id:
+
 photo: "/assets/images/persons/arle/portrait.jpeg"
+
 years_at_kgik: "1975–2005"
+
 bio_short: "Краткая биографическая справка: чем известен, что внёс в институт, ключевые работы."
+
 # works:
 #   - title: "Название книги"
 #     cover: "/assets/images/persons/navia/book1-cover.jpeg"

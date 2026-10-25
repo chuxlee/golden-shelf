@@ -27,37 +27,41 @@ layout: default
     </div>
   </header>
 
-  {% if content and content != "" %}
   <section class="person-bio-full">
     {{ content }}
   </section>
-  {% endif %}
 
-  {% if person.works and person.works.size > 0 %}
+  <!-- БЛОК РАБОТ (КНИГ) -->
+  {% if person.author_id %}
   <section class="person-works">
     <h2>Труды и публикации</h2>
     <div class="works-grid">
-      {% for work in person.works %}
-      <div class="work-card">
-        <div class="work-images">
-          {% if work.cover %}
-            <img class="work-cover" src="{{ work.cover | relative_url }}" alt="Обложка: {{ work.title }}">
-          {% endif %}
-          {% if work.spread %}
-            <img class="work-spread" src="{{ work.spread | relative_url }}" alt="Разворот: {{ work.title }}">
-          {% endif %}
-        </div>
-        <div class="work-body">
-          <h3>{{ work.title }}</h3>
-          {% if work.description %}<p>{{ work.description }}</p>{% endif %}
-          {% if work.link %}<a class="btn" href="{{ work.link }}" target="_blank" rel="noopener">Открыть</a>{% endif %}
-        </div>
-      </div>
-      {% endfor %}
+      {% assign person_works = site.works | where: "author_id", person.author_id %}
+      
+      {% if person_works.size > 0 %}
+        {% for work in person_works %}
+        <a class="work-card" href="{{ work.url | relative_url }}" style="text-decoration: none; color: inherit;">
+          <div class="work-images">
+            {% if work.cover %}
+              <img class="work-cover" src="{{ work.cover | relative_url }}" alt="Обложка: {{ work.title }}">
+            {% else %}
+              <div class="cover-placeholder">Нет обложки</div>
+            {% endif %}
+          </div>
+          <div class="work-body">
+            <h3>{{ work.title }}</h3>
+            {% if work.description %}<p>{{ work.description }}</p>{% endif %}
+          </div>
+        </a>
+        {% endfor %}
+      {% else %}
+        <p style="color: var(--muted);">Список изданий пока не добавлен.</p>
+      {% endif %}
     </div>
   </section>
   {% endif %}
 
+  <!-- БЛОК МЕДИА -->
   {% if person.media and person.media.size > 0 %}
   <section class="person-media">
     <h2>Медиа и дополнительные материалы</h2>
@@ -70,14 +74,56 @@ layout: default
           </div>
         {% elsif m.type == "audio" %}
           <audio controls src="{{ m.url | relative_url }}"></audio>
+        {% elsif m.type == "image" %}
+          <figure class="media-figure">
+            <img src="{{ m.url | relative_url }}" alt="{{ m.label }}" loading="lazy">
+          </figure>
         {% elsif m.type == "pdf" %}
           <a class="btn" href="{{ m.url | relative_url }}" target="_blank" rel="noopener">Открыть документ (PDF)</a>
-        {% elsif m.type == "link" %}
-          <a class="btn" href="{{ m.url }}" target="_blank" rel="noopener">Перейти</a>
         {% endif %}
       </div>
     {% endfor %}
   </section>
   {% endif %}
+
+  <!-- ПОЛНЫЙ СПИСОК ТРУДОВ -->
+  {% if person.bibliography and person.bibliography.size > 0 %}
+  <section class="person-bibliography">
+    <h2>Полный список работ</h2>
+    
+    <!-- Даем details уникальный ID, чтобы к нему можно было обратиться -->
+    <details id="bib-details">
+      <summary>Развернуть список публикаций ({{ person.bibliography.size }})</summary>
+      <div class="bib-list">
+        <ol>
+          {% for item in person.bibliography %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ol>
+        
+        <!-- Кнопка закрытия списка в самом низу -->
+        <div style="text-align: center; margin-top: 24px;">
+          <button type="button" class="btn close-bib-btn">Свернуть список</button>
+        </div>
+      </div>
+    </details>
+  </section>
+  {% endif %}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const closeBtn = document.querySelector(".close-bib-btn");
+      const detailsBlock = document.getElementById("bib-details");
+      
+      if (closeBtn && detailsBlock) {
+        closeBtn.addEventListener("click", function() {
+          // Закрываем блок
+          detailsBlock.removeAttribute("open");
+          // Плавно прокручиваем страницу к заголовку "Полный список работ"
+          detailsBlock.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    });
+  </script>
 
 </article>

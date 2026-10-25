@@ -6,11 +6,15 @@
   <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <a class="site-logo-link" href="{{ '/' | relative_url }}">
+        <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Логотип" class="site-logo">
+        <span class="site-title">{{ site.title }}</span>
+      </a>
       <nav class="site-nav">
         <a href="{{ '/' | relative_url }}">Выставка</a>
         <a href="{{ '/' | relative_url }}#about">О проекте</a>
@@ -27,5 +31,35 @@
       <p>Краснодарский государственный институт культуры · 60 лет</p>
     </div>
   </footer>
+
+    <!-- Кнопка наверх -->
+  <button id="scrollToTopBtn" class="scroll-to-top" title="Наверх" aria-label="Прокрутить наверх">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+      
+      // Показываем/скрываем кнопку при прокрутке
+      window.addEventListener("scroll", function() {
+        if (window.scrollY > 400) { // Появляется после 400px прокрутки
+          scrollToTopBtn.classList.add("show");
+        } else {
+          scrollToTopBtn.classList.remove("show");
+        }
+      });
+
+      // Плавная прокрутка наверх при клике
+      scrollToTopBtn.addEventListener("click", function() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+    });
+  </script>
 </body>
 </html>
