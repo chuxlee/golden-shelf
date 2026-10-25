@@ -1,7 +1,7 @@
 title: "Педагоги КГИК. 60 лет"
 description: "Интерактивная книжная выставка трудов преподавателей Краснодарского государственного института культуры"
-baseurl: ""
-url: ""
+url: "https://chuxlee.github.io"
+baseurl: "/golden-shelf"
 
 collections:
   persons:
