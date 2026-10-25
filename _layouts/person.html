@@ -1,0 +1,83 @@
+---
+layout: default
+---
+{% assign person = page %}
+<article class="container person-page">
+
+  <nav class="breadcrumb">
+    <a href="{{ '/' | relative_url }}">← Все преподаватели</a>
+  </nav>
+
+  <header class="person-header">
+    <div class="person-portrait">
+      {% if person.photo %}
+        <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
+      {% else %}
+        <div class="photo-placeholder big">{{ person.name | slice: 0 }}</div>
+      {% endif %}
+    </div>
+    <div class="person-intro">
+      <h1>{{ person.name }}</h1>
+      {% if person.years_at_kgik %}
+        <p class="person-years">{{ person.years_at_kgik }}</p>
+      {% endif %}
+      {% if person.bio_short %}
+        <p class="person-bio-lead">{{ person.bio_short }}</p>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if content and content != "" %}
+  <section class="person-bio-full">
+    {{ content }}
+  </section>
+  {% endif %}
+
+  {% if person.works and person.works.size > 0 %}
+  <section class="person-works">
+    <h2>Труды и публикации</h2>
+    <div class="works-grid">
+      {% for work in person.works %}
+      <div class="work-card">
+        <div class="work-images">
+          {% if work.cover %}
+            <img class="work-cover" src="{{ work.cover | relative_url }}" alt="Обложка: {{ work.title }}">
+          {% endif %}
+          {% if work.spread %}
+            <img class="work-spread" src="{{ work.spread | relative_url }}" alt="Разворот: {{ work.title }}">
+          {% endif %}
+        </div>
+        <div class="work-body">
+          <h3>{{ work.title }}</h3>
+          {% if work.description %}<p>{{ work.description }}</p>{% endif %}
+          {% if work.link %}<a class="btn" href="{{ work.link }}" target="_blank" rel="noopener">Открыть</a>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if person.media and person.media.size > 0 %}
+  <section class="person-media">
+    <h2>Медиа и дополнительные материалы</h2>
+    {% for m in person.media %}
+      <div class="media-item">
+        <h3>{{ m.label }}</h3>
+        {% if m.type == "video" %}
+          <div class="media-embed">
+            <iframe src="{{ m.url }}" title="{{ m.label }}" frameborder="0" allowfullscreen loading="lazy"></iframe>
+          </div>
+        {% elsif m.type == "audio" %}
+          <audio controls src="{{ m.url | relative_url }}"></audio>
+        {% elsif m.type == "pdf" %}
+          <a class="btn" href="{{ m.url | relative_url }}" target="_blank" rel="noopener">Открыть документ (PDF)</a>
+        {% elsif m.type == "link" %}
+          <a class="btn" href="{{ m.url }}" target="_blank" rel="noopener">Перейти</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+</article>

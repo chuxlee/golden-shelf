@@ -1,0 +1,20 @@
+title: "Педагоги КГИК. 60 лет"
+description: "Интерактивная книжная выставка трудов преподавателей Краснодарского государственного института культуры"
+baseurl: ""
+url: ""
+
+collections:
+  persons:
+    output: true
+    permalink: /persons/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "persons"
+    values:
+      layout: "person"
+
+markdown: kramdown
+exclude:
+  - README.md

@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="container">
+    <h1>{{ site.title }}</h1>
+    <p class="hero-sub">{{ site.description }}</p>
+  </div>
+</section>
+
+<section class="container" id="persons">
+  <div class="person-grid">
+    {% for person in site.persons %}
+    <a class="person-card" href="{{ person.url | relative_url }}">
+      <div class="person-card-photo">
+        {% if person.photo %}
+          <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
+        {% else %}
+          <div class="photo-placeholder">{{ person.name | slice: 0 }}</div>
+        {% endif %}
+      </div>
+      <div class="person-card-body">
+        <h2>{{ person.name }}</h2>
+        {% if person.years_at_kgik %}
+          <p class="person-years">{{ person.years_at_kgik }}</p>
+        {% endif %}
+        {% if person.bio_short %}
+          <p class="person-bio">{{ person.bio_short | truncate: 120 }}</p>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container about" id="about">
+  <h2>О проекте</h2>
+  <p>Выставка отражает труды педагогов КГИК за 60 лет: биографии, публикации, изографические работы, ноты, аудио- и видеоматериалы.</p>
+</section>
