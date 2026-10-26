@@ -106,9 +106,14 @@ layout: default
             <div class="media-caption">{{ m.label }}</div>
           {% elsif m.type == "pdf" %}
             <a class="btn" href="{{ m.url | relative_url }}" target="_blank" rel="noopener">Открыть документ (PDF)</a>
+          {% elsif m.type == "link" %}
+            <div class="media-link-card">
+              <!-- <p>{{ m.label }}</p> -->
+              <a class="btn" href="{{ m.url }}" target="_blank" rel="noopener">Читать по ссылке →</a>
+            </div>
+            <div class="media-caption">{{ m.label }}</div>
           {% endif %}
-        </div>
-      {% endfor %}
+        {% endfor %}
     </div>
     
   </section>
