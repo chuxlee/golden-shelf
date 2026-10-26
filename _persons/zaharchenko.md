@@ -56,39 +56,39 @@ media:
     label: "Семья Захарченко (мама, на руках Боря, слева Виктор, справа Зоя). 1942 год"
 
   - type: "audio"
-    url: "/assets/images/audio/shli-my-eskadronami.mp3"
+    url: "/assets/audio/shli-my-eskadronami.mp3"
     label: "Шли мы эскадронами"
 
   - type: "audio"
-    url: "/assets/images/audio/bells.mp3"
+    url: "/assets/audio/bells.mp3"
     label: "Колокольный звон"
 
   - type: "audio"
-    url: "/assets/images/audio/lubo.mp3"
+    url: "/assets/audio/lubo.mp3"
     label: "Любо, братцы, любо"
     
   - type: "audio"
-    url: "/assets/images/audio/matushka.mp3"
+    url: "/assets/audio/matushka.mp3"
     label: "Матушка Добрынюшке наказывала"    
     
   - type: "audio"
-    url: "/assets/images/audio/widow.mp3"
+    url: "/assets/audio/widow.mp3"
     label: "Не будите, журавли, вдов России"    
     
   - type: "audio"
-    url: "/assets/images/audio/stoga.mp3"
+    url: "/assets/audio/stoga.mp3"
     label: "Ой, стога, стога"
     
   - type: "audio"
-    url: "/assets/images/audio/evening.mp3"
+    url: "/assets/audio/evening.mp3"
     label: "Ой, то не вечер"
 
   - type: "audio"
-    url: "/assets/images/audio/horses.mp3"
+    url: "/assets/audio/horses.mp3"
     label: "Распрягайте, хлопцы, коней"
 
   - type: "audio"
-    url: "/assets/images/audio/crow.mp3"
+    url: "/assets/audio/crow.mp3"
     label: "Черный ворон"
 
 
