@@ -208,3 +208,122 @@ audio { width: 100%; max-width: 480px; }
   transition: background 0.2s ease;
 }
 .btn:hover { background: #5e211c; }
+
+/* =========================================
+   ПАНЕЛЬ ПОИСКА
+   ========================================= */
+.search-panel {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 40px;
+}
+
+.search-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.search-tab {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.search-tab:hover {
+  color: var(--accent);
+  background: var(--bg);
+}
+
+.search-tab.active {
+  color: #fff;
+  background: var(--accent);
+  font-weight: bold;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transition: border-color 0.2s;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #fff;
+}
+
+/* Контейнеры с контентом */
+.search-content {
+  display: none;
+}
+
+.search-content.active {
+  display: block;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  padding: 40px 0;
+}
+
+/* Сетка книг на главной (используем ту же, что и на странице автора) */
+#works-list .works-grid {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+/* Стили для текстового списка публикаций в поиске */
+.bib-search-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 800px;
+}
+
+.bib-search-item {
+  display: block;
+  background: var(--surface);
+  padding: 16px 20px;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bib-search-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.bib-search-info h4 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.bib-search-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}

@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <section class="hero">
   <div class="container">
     <h1>{{ site.title }}</h1>
@@ -9,31 +10,155 @@ layout: default
 </section>
 
 <section class="container" id="persons">
-  <div class="person-grid">
-    {% for person in site.persons %}
-    <a class="person-card" href="{{ person.url | relative_url }}">
-      <div class="person-card-photo">
-        {% if person.photo %}
-          <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
-        {% else %}
-          <div class="photo-placeholder">{{ person.name | slice: 0 }}</div>
-        {% endif %}
+  
+      <!-- ПАНЕЛЬ ПОИСКА -->
+    <div class="search-panel">
+          <div class="search-tabs">
+      <button class="search-tab active" data-target="persons-list">Преподаватели</button>
+      <button class="search-tab" data-target="works-list">Книги (альбомы)</button>
+      <button class="search-tab" data-target="bib-list">Статьи и публикации</button>
+    </div>
+      <div class="search-input-wrapper">
+        <input type="text" id="search-input" placeholder="Начните вводить имя или название...">
       </div>
-      <div class="person-card-body">
-        <h2>{{ person.name }}</h2>
-        {% if person.years_at_kgik %}
-          <p class="person-years">{{ person.years_at_kgik }}</p>
-        {% endif %}
-        {% if person.bio_short %}
-          <p class="person-bio">{{ person.bio_short | truncate: 120 }}</p>
-        {% endif %}
-      </div>
-    </a>
-    {% endfor %}
+    </div>
+
+  <!-- СПИСОК ПРЕПОДАВАТЕЛЕЙ -->
+  <div id="persons-list" class="search-content active">
+    <div class="person-grid">
+      {% for person in site.persons %}
+      <a class="person-card search-item" href="{{ person.url | relative_url }}" data-title="{{ person.name | downcase }}">
+        <div class="person-card-photo">
+          {% if person.photo %}
+            <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
+          {% else %}
+            <div class="photo-placeholder">{{ person.name | slice: 0 }}</div>
+          {% endif %}
+        </div>
+        <div class="person-card-body">
+          <h2>{{ person.name }}</h2>
+          {% if person.years_at_kgik %}
+            <p class="person-years">{{ person.years_at_kgik }}</p>
+          {% endif %}
+          {% if person.bio_short %}
+            <p class="person-bio">{{ person.bio_short | truncate: 100 }}</p>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <p id="no-persons-msg" class="no-results" style="display: none;">Ничего не найдено.</p>
   </div>
+
+  <!-- СПИСОК КНИГ (ИЗ КОЛЛЕКЦИИ WORKS) -->
+  <div id="works-list" class="search-content">
+    <div class="works-grid">
+      {% for work in site.works %}
+      <a class="work-card search-item" href="{{ work.url | relative_url }}" data-title="{{ work.title | downcase }}">
+        <div class="work-images">
+          {% if work.cover %}
+            <img class="work-cover" src="{{ work.cover | relative_url }}" alt="Обложка: {{ work.title }}">
+          {% else %}
+            <div class="cover-placeholder">Нет обложки</div>
+          {% endif %}
+        </div>
+        <div class="work-body">
+          <h3>{{ work.title }}</h3>
+          {% if work.description %}<p>{{ work.description | truncate: 80 }}</p>{% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <p id="no-works-msg" class="no-results" style="display: none;">Ничего не найдено.</p>
+  </div>
+
+  <!-- СПИСОК КНИГ (ИЗ БИБЛИОГРАФИИ ПРЕПОДАВАТЕЛЕЙ) -->
+  <div id="bib-list" class="search-content">
+    <div class="bib-search-grid">
+      {% for person in site.persons %}
+        {% if person.bibliography %}
+          {% for bib_item in person.bibliography %}
+            <!-- Извлекаем название книги для поиска (текст до первого слэша или точки) -->
+            {% assign clean_title = bib_item | split: '/' | first | split: '.' | first %}
+            <a class="bib-search-item search-item" href="{{ person.url | relative_url }}" data-title="{{ bib_item | downcase }}">
+              <div class="bib-search-info">
+                <h4>{{ clean_title }}</h4>
+                <p>Автор: {{ person.name }}</p>
+              </div>
+            </a>
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <p id="no-bib-msg" class="no-results" style="display: none;">Ничего не найдено.</p>
+  </div>
+
 </section>
 
 <section class="container about" id="about">
   <h2>О проекте</h2>
   <p>Выставка отражает труды педагогов КГИК за 60 лет: биографии, публикации, изографические работы, ноты, аудио- и видеоматериалы.</p>
 </section>
+
+<!-- СКРИПТ ПОИСКА -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const searchInput = document.getElementById("search-input");
+  const tabs = document.querySelectorAll(".search-tab");
+  const contents = document.querySelectorAll(".search-content");
+  
+  let currentTab = "persons-list";
+
+  // Переключение вкладок
+  tabs.forEach(tab => {
+    tab.addEventListener("click", function() {
+      // Убираем активный класс у всех
+      tabs.forEach(t => t.classList.remove("active"));
+      contents.forEach(c => c.classList.remove("active"));
+      
+      // Добавляем активный класс текущей
+      this.classList.add("active");
+      currentTab = this.getAttribute("data-target");
+      document.getElementById(currentTab).classList.add("active");
+      
+      // Вместо очистки просто применяем текущий поисковый запрос к новой вкладке
+      searchInput.dispatchEvent(new Event('input'));
+    });
+  });
+
+  // Логика поиска
+  searchInput.addEventListener("input", function() {
+    const query = this.value.toLowerCase().trim();
+    const activeContent = document.getElementById(currentTab);
+    const items = activeContent.querySelectorAll(".search-item");
+    const noResultsMsg = activeContent.querySelector(".no-results");
+    let visibleCount = 0;
+
+    items.forEach(item => {
+      const title = item.getAttribute("data-title");
+      if (title.includes(query)) {
+        item.style.display = ""; // Показываем
+        visibleCount++;
+      } else {
+        item.style.display = "none"; // Скрываем
+      }
+    });
+
+    // Показываем сообщение, если ничего не найдено
+    if (visibleCount === 0 && query !== "") {
+      noResultsMsg.style.display = "block";
+    } else {
+      noResultsMsg.style.display = "none";
+    }
+  });
+
+  function resetSearch() {
+    const activeContent = document.getElementById(currentTab);
+    const items = activeContent.querySelectorAll(".search-item");
+    const noResultsMsg = activeContent.querySelector(".no-results");
+    
+    items.forEach(item => item.style.display = "");
+    if (noResultsMsg) noResultsMsg.style.display = "none";
+  }
+});
+</script>
