@@ -295,7 +295,6 @@ audio { width: 100%; max-width: 480px; }
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 800px;
 }
 
 .bib-search-item {
@@ -315,15 +314,16 @@ audio { width: 100%; max-width: 480px; }
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.bib-search-info h4 {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  margin: 0 0 4px;
+.bib-search-text {
+  font-size: 0.95rem;
   color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 8px;
 }
 
-.bib-search-info p {
-  margin: 0;
+.bib-search-author {
   font-size: 0.85rem;
   color: var(--muted);
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
 }

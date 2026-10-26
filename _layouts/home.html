@@ -72,18 +72,16 @@ layout: default
     <p id="no-works-msg" class="no-results" style="display: none;">Ничего не найдено.</p>
   </div>
 
-  <!-- СПИСОК КНИГ (ИЗ БИБЛИОГРАФИИ ПРЕПОДАВАТЕЛЕЙ) -->
+  <!-- СПИСОК СТАТЕЙ И ПУБЛИКАЦИЙ (ИЗ БИБЛИОГРАФИИ) -->
   <div id="bib-list" class="search-content">
     <div class="bib-search-grid">
       {% for person in site.persons %}
         {% if person.bibliography %}
           {% for bib_item in person.bibliography %}
-            <!-- Извлекаем название книги для поиска (текст до первого слэша или точки) -->
-            {% assign clean_title = bib_item | split: '/' | first | split: '.' | first %}
             <a class="bib-search-item search-item" href="{{ person.url | relative_url }}" data-title="{{ bib_item | downcase }}">
-              <div class="bib-search-info">
-                <h4>{{ clean_title }}</h4>
-                <p>Автор: {{ person.name }}</p>
+              <div class="bib-search-text">{{ bib_item }}</div>
+              <div class="bib-search-author">
+                Автор: <strong>{{ person.name }}</strong>
               </div>
             </a>
           {% endfor %}
@@ -136,14 +134,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     items.forEach(item => {
       const title = item.getAttribute("data-title");
-      if (title.includes(query)) {
+      // Ищем точное вхождение строки (уже приведенной к нижнему регистру в HTML)
+      if (title && title.includes(query)) {
         item.style.display = ""; // Показываем
         visibleCount++;
       } else {
         item.style.display = "none"; // Скрываем
       }
     });
-
+    
     // Показываем сообщение, если ничего не найдено
     if (visibleCount === 0 && query !== "") {
       noResultsMsg.style.display = "block";
