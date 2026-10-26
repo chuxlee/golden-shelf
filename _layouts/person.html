@@ -89,24 +89,28 @@ layout: default
   {% if person.media and person.media.size > 0 %}
   <section class="person-media">
     <h2>Медиа и дополнительные материалы</h2>
-    {% for m in person.media %}
-      <div class="media-item">
-        <h3>{{ m.label }}</h3>
-        {% if m.type == "video" %}
-          <div class="media-embed">
-            <iframe src="{{ m.url }}" title="{{ m.label }}" frameborder="0" allowfullscreen loading="lazy"></iframe>
-          </div>
-        {% elsif m.type == "audio" %}
-          <audio controls src="{{ m.url | relative_url }}"></audio>
-        {% elsif m.type == "image" %}
-          <figure class="media-figure">
-            <img src="{{ m.url | relative_url }}" alt="{{ m.label }}" loading="lazy">
-          </figure>
-        {% elsif m.type == "pdf" %}
-          <a class="btn" href="{{ m.url | relative_url }}" target="_blank" rel="noopener">Открыть документ (PDF)</a>
-        {% endif %}
-      </div>
-    {% endfor %}
+    
+    <div class="media-carousel">
+      {% for m in person.media %}
+        <div class="media-carousel-item">
+          {% if m.type == "video" %}
+            <div class="media-embed">
+              <iframe src="{{ m.url }}" title="{{ m.label }}" frameborder="0" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="media-caption">{{ m.label }}</div>
+          {% elsif m.type == "audio" %}
+            <audio controls src="{{ m.url | relative_url }}"></audio>
+            <div class="media-caption">{{ m.label }}</div>
+          {% elsif m.type == "image" %}
+            <img src="{{ m.url | relative_url }}" alt="{{ m.label }}" loading="lazy" onclick="window.open(this.src, '_blank')">
+            <div class="media-caption">{{ m.label }}</div>
+          {% elsif m.type == "pdf" %}
+            <a class="btn" href="{{ m.url | relative_url }}" target="_blank" rel="noopener">Открыть документ (PDF)</a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    
   </section>
   {% endif %}
 

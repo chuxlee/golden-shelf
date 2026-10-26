@@ -118,12 +118,12 @@
 /* =========================================
    БЛОК МЕДИА (ФОТО, ВИДЕО, АУДИО)
    ========================================= */
-.media-item { margin-bottom: 32px; }
+/* .media-item { margin-bottom: 32px; }
 .media-item h3 {
   font-family: var(--font-serif);
   font-size: 1.1rem;
   margin: 0 0 12px;
-}
+} */
 
 .media-embed {
   position: relative;
@@ -145,7 +145,7 @@
 audio { width: 100%; max-width: 480px; }
 
 /* Картинки в медиа-блоке */
-.media-figure {
+/* .media-figure {
   margin: 0;
   max-width: 700px;
 }
@@ -160,6 +160,85 @@ audio { width: 100%; max-width: 480px; }
   font-size: 0.9rem;
   color: var(--muted);
   font-style: italic;
+} */
+
+/* =========================================
+   КАРУСЕЛЬ МЕДИА (ГОРИЗОНТАЛЬНАЯ ПРОКРУТКА)
+   ========================================= */
+.media-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Включает горизонтальную прокрутку */
+  scroll-snap-type: x mandatory; /* Прилипание картинок при прокрутке */
+  padding-bottom: 16px; /* Место для скроллбара */
+  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+}
+
+/* Стилизация самого скроллбара (для WebKit браузеров: Chrome, Safari, Edge) */
+.media-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.media-carousel::-webkit-scrollbar-track {
+  background: var(--border);
+  border-radius: 4px;
+}
+.media-carousel::-webkit-scrollbar-thumb {
+  background: var(--accent-soft);
+  border-radius: 4px;
+}
+.media-carousel::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Карточка одного элемента в карусели */
+.media-carousel-item {
+  flex: 0 0 auto; /* Запрещает элементам сжиматься */
+  width: 400px; /* Фиксированная ширина карточки на десктопе */
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Картинки в карусели */
+.media-carousel-item img {
+  width: 100%;
+  height: 300px; /* Фиксированная высота, чтобы все карточки были ровными */
+  object-fit: cover; /* Обрезает края, сохраняя пропорции */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.media-carousel-item img:hover {
+  transform: scale(1.02);
+}
+
+/* Видео в карусели */
+.media-carousel-item .media-embed {
+  width: 100%;
+  max-width: none;
+  box-shadow: var(--shadow);
+}
+
+/* Подписи под картинками */
+.media-caption {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Адаптивность для мобильных телефонов */
+@media (max-width: 720px) {
+  .media-carousel-item {
+    width: 280px; /* На телефонах карточки чуть уже */
+  }
+  .media-carousel-item img {
+    height: 220px;
+  }
 }
 
 /* =========================================
