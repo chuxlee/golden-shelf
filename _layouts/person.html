@@ -99,9 +99,13 @@ layout: default
             </div>
             <div class="media-caption">{{ m.label }}</div>
           {% elsif m.type == "audio" %}
-            <audio controls src="{{ m.url | relative_url }}"></audio>
-            <div class="media-caption">{{ m.label }}</div>
-          {% elsif m.type == "image" %}
+            <div style="width: 100%;">
+              <audio controls style="width: 100%; max-width: 400px;">
+                <source src="{{ m.url | relative_url }}" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио.
+              </audio>
+            </div>
+            <div class="media-caption">{{ m.label }}</div>          {% elsif m.type == "image" %}
             <img src="{{ m.url | relative_url }}" alt="{{ m.label }}" loading="lazy" onclick="window.open(this.src, '_blank')">
             <div class="media-caption">{{ m.label }}</div>
           {% elsif m.type == "pdf" %}
