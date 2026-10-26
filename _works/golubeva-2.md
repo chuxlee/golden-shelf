@@ -5,7 +5,6 @@ author_id: golubeva
 
 cover: "/assets/images/persons/golubeva/book2-cover.png"
 
-description: ""
 ---
 
 ## Библиографическое описание

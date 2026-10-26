@@ -1,4 +1,6 @@
 ---
+title: ""
+
 name: ""
 
 author_id: 

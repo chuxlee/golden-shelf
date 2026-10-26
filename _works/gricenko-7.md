@@ -5,7 +5,6 @@ author_id: gricenko
 
 cover: "/assets/images/persons/gricenko/book7-cover.jpg"
 
-description: "Монография является изложением результатов авторской деконструкции культуры как семиотической системы."
 ---
 
 ## Библиографическое описание

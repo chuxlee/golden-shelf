@@ -5,7 +5,6 @@ author_id: dulatova
 
 cover: "/assets/images/persons/dulatova/book2-cover.jpg"
 
-description: "В пособии раскрыто ее теоретическое, методическое и практическое содержание."
 ---
 
 ## Библиографическое описание

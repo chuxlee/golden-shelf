@@ -5,7 +5,6 @@ author_id: gricenko
 
 cover: "/assets/images/persons/gricenko/book6-cover.jpg"
 
-description: "Историко-документальное издание, посвящённое 60-летию Рубцовского машиностроительного техникума"
 ---
 
 ## Библиографическое описание
