@@ -7,9 +7,6 @@
   <title>
     {% if page.title %}
       {{ page.title }} — {{ site.title }}
-    {% elsif page.name and page.name != page.basename %}
-      <!-- page.name != page.basename защищает от вывода имени файла (dulatova) -->
-      {{ page.name }} — {{ site.title }}
     {% else %}
       {{ site.title }}
     {% endif %}
