@@ -61,6 +61,30 @@ layout: default
   </section>
   {% endif %}
 
+  <!-- ПОЛНЫЙ СПИСОК ТРУДОВ -->
+  {% if person.bibliography and person.bibliography.size > 0 %}
+  <section class="person-bibliography">
+    <h2>Полный список работ</h2>
+    
+    <!-- Даем details уникальный ID, чтобы к нему можно было обратиться -->
+    <details id="bib-details">
+      <summary>Развернуть список публикаций ({{ person.bibliography.size }})</summary>
+      <div class="bib-list">
+        <ol>
+          {% for item in person.bibliography %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ol>
+        
+        <!-- Кнопка закрытия списка в самом низу -->
+        <div style="text-align: center; margin-top: 24px;">
+          <button type="button" class="btn close-bib-btn">Свернуть список</button>
+        </div>
+      </div>
+    </details>
+  </section>
+  {% endif %}
+
   <!-- БЛОК МЕДИА -->
   {% if person.media and person.media.size > 0 %}
   <section class="person-media">
@@ -86,29 +110,6 @@ layout: default
   </section>
   {% endif %}
 
-  <!-- ПОЛНЫЙ СПИСОК ТРУДОВ -->
-  {% if person.bibliography and person.bibliography.size > 0 %}
-  <section class="person-bibliography">
-    <h2>Полный список работ</h2>
-    
-    <!-- Даем details уникальный ID, чтобы к нему можно было обратиться -->
-    <details id="bib-details">
-      <summary>Развернуть список публикаций ({{ person.bibliography.size }})</summary>
-      <div class="bib-list">
-        <ol>
-          {% for item in person.bibliography %}
-            <li>{{ item }}</li>
-          {% endfor %}
-        </ol>
-        
-        <!-- Кнопка закрытия списка в самом низу -->
-        <div style="text-align: center; margin-top: 24px;">
-          <button type="button" class="btn close-bib-btn">Свернуть список</button>
-        </div>
-      </div>
-    </details>
-  </section>
-  {% endif %}
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
