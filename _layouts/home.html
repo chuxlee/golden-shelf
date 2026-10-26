@@ -60,7 +60,7 @@ layout: default
     <p id="no-persons-msg" class="no-results" style="display: none;">Ничего не найдено.</p>
   </div>
 
-  <!-- СПИСОК КНИГ (ИЗ КОЛЛЕКЦИИ WORKS) -->
+    <!-- СПИСОК КНИГ (ИЗ КОЛЛЕКЦИИ WORKS) -->
   <div id="works-list" class="search-content">
     <div class="works-grid">
       {% for work in site.works %}
@@ -74,6 +74,13 @@ layout: default
         </div>
         <div class="work-body">
           <h3>{{ work.title }}</h3>
+          
+          <!-- ВОТ ЭТОТ БЛОК ИЩЕТ АВТОРА -->
+          {% assign author = site.persons | where: "author_id", work.author_id | first %}
+          {% if author %}
+            <p class="work-author">{{ author.name }}</p>
+          {% endif %}
+          
           {% if work.description %}<p>{{ work.description | truncate: 80 }}</p>{% endif %}
         </div>
       </a>
