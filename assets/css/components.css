@@ -203,3 +203,70 @@ audio { width: 100%; max-width: 480px; }
   .media-carousel-item img { height: 220px; }
   .media-link-card { height: 220px; }
 }
+
+/* =========================================
+   НАВИГАЦИЯ ПО СТРАНИЦЕ АВТОРА
+   ========================================= */
+.person-toc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+  /* Прилипание к верху экрана при прокрутке */
+  position: sticky;
+  top: 80px; /* Отступ, чтобы не перекрывалось шапкой сайта */
+  z-index: 9;
+}
+
+.toc-title {
+  font-weight: bold;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-right: 8px;
+}
+
+.person-toc a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--bg);
+  transition: background 0.2s, color 0.2s;
+}
+
+.person-toc a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Плавная прокрутка для всей страницы */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Отступ сверху, чтобы при переходе по якорю заголовок не прятался под меню */
+section[id] {
+  scroll-margin-top: 140px;
+}
+
+/* На мобильных устройствах делаем меню более компактным */
+@media (max-width: 720px) {
+  .person-toc {
+    top: 60px;
+    padding: 10px;
+    gap: 8px;
+  }
+  .person-toc a {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+  section[id] {
+    scroll-margin-top: 120px;
+  }
+}

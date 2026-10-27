@@ -27,13 +27,28 @@ layout: default
     </div>
   </header>
 
-  <section class="person-bio-full">
+    <!-- МЕНЮ НАВИГАЦИИ -->
+  <nav class="person-toc">
+    <span class="toc-title">Навигация:</span>
+    <a href="#biography">Биография</a>
+    {% if person.author_id %}
+      <a href="#works">Труды</a>
+    {% endif %}
+    {% if person.bibliography and person.bibliography.size > 0 %}
+      <a href="#bibliography">Список работ</a>
+    {% endif %}
+    {% if person.media and person.media.size > 0 %}
+      <a href="#media">Медиа</a>
+    {% endif %}
+  </nav>
+
+  <section class="person-bio-full" id="biography">
     {{ content }}
   </section>
 
   <!-- БЛОК РАБОТ (КНИГ) -->
   {% if person.author_id %}
-  <section class="person-works">
+  <section class="person-works" id="works">
     <h2>Труды и публикации</h2>
     <div class="works-grid">
       {% assign person_works = site.works | where: "author_id", person.author_id %}
@@ -63,7 +78,7 @@ layout: default
 
   <!-- ПОЛНЫЙ СПИСОК ТРУДОВ -->
   {% if person.bibliography and person.bibliography.size > 0 %}
-  <section class="person-bibliography">
+  <section class="person-bibliography" id="bibliography">
     <h2>Полный список работ</h2>
     
     <!-- Даем details уникальный ID, чтобы к нему можно было обратиться -->
@@ -87,7 +102,7 @@ layout: default
 
   <!-- БЛОК МЕДИА -->
   {% if person.media and person.media.size > 0 %}
-  <section class="person-media">
+  <section class="person-media" id="media">
     <h2>Медиа и дополнительные материалы</h2>
     
     <div class="media-carousel">
