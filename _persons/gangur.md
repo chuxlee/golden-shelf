@@ -4,6 +4,9 @@ title: "Гангур Наталья Александровна"
 name: "Гангур Наталья Александровна"
 
 author_id: gangur
+degree: "Доктор наук"
+science_field: "Исторические науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/gangur/portrait.jpg"
 

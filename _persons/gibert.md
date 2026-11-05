@@ -4,6 +4,7 @@ title: "Гиберт Григорий Григорьевич"
 name: "Гиберт Григорий Григорьевич"
 
 author_id: gibert
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/gibert/picture1.png"
 

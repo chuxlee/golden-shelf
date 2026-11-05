@@ -4,6 +4,9 @@ title: "Морозов Сергей Александрович"
 name: "Морозов Сергей Александрович"
 
 author_id: morozov
+degree: "Доктор наук"
+science_field: "Философские науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/morozov/portrait.png"
 

@@ -248,3 +248,31 @@
   .person-portrait { max-width: 220px; }
   .site-nav a { margin-left: 14px; font-size: 0.85rem; }
 }
+.person-filters:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.person-filters label {
+  display: grid;
+  flex: 1 1 11rem;
+  gap: 4px;
+}
+
+.person-filters select,
+.person-filters button {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+}
+
+.person-filters button {
+  color: var(--accent);
+  cursor: pointer;
+}

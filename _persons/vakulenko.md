@@ -4,6 +4,9 @@ title: "Вакуленко Екатерина Гавриловна"
 name: "Вакуленко Екатерина Гавриловна"
 
 author_id: vakulenko
+degree: "Доктор наук"
+science_field: "Педагогические науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/vakulenko/portrait.jpg"
 

@@ -30,13 +30,29 @@ layout: default
       <div class="search-input-wrapper">
         <input type="text" id="search-input" placeholder="Начните вводить имя или название...">
       </div>
+
+      <div class="person-filters" id="person-filters" role="group" aria-label="Фильтры преподавателей" hidden>
+        <label>Учёная степень
+          <select data-filter="degree"><option value="">Любая степень</option></select>
+        </label>
+        <label>Учёное звание
+          <select data-filter="academicTitle"><option value="">Любое звание</option></select>
+        </label>
+        <label>Отрасль наук
+          <select data-filter="scienceField"><option value="">Любая отрасль</option></select>
+        </label>
+        <button type="button" id="reset-person-filters">Сбросить фильтры</button>
+      </div>
     </div>
 
   <!-- СПИСОК ПРЕПОДАВАТЕЛЕЙ -->
   <div id="persons-list" class="search-content active">
     <div class="person-grid">
       {% for person in site.persons %}
-      <a class="person-card search-item" href="{{ person.url | relative_url }}" data-title="{{ person.name | downcase }}">
+      <a class="person-card search-item" href="{{ person.url | relative_url }}" data-title="{{ person.name | downcase | escape }}"
+         data-degree="{{ person.degree | strip | escape }}"
+         data-academic-title="{{ person.academic_title | strip | escape }}"
+         data-science-field="{{ person.science_field | strip | escape }}">
         <div class="person-card-photo">
           {% if person.photo %}
             <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
@@ -56,14 +72,14 @@ layout: default
       </a>
       {% endfor %}
     </div>
-    <p id="no-persons-msg" class="no-results" style="display: none;">Ничего не найдено.</p>
+    <p id="no-persons-msg" class="no-results" role="status" style="display: none;">Ничего не найдено.</p>
   </div>
 
     <!-- СПИСОК КНИГ (ИЗ КОЛЛЕКЦИИ WORKS) -->
   <div id="works-list" class="search-content">
     <div class="works-grid">
       {% for work in site.works %}
-      <a class="work-card search-item" href="{{ work.url | relative_url }}" data-title="{{ work.title | downcase }}">
+      <a class="work-card search-item" href="{{ work.url | relative_url }}" data-title="{{ work.title | downcase | escape }}">
         <div class="work-images">
           {% if work.cover %}
             <img class="work-cover" src="{{ work.cover | relative_url }}" alt="Обложка: {{ work.title }}">
@@ -94,7 +110,7 @@ layout: default
       {% for person in site.persons %}
         {% if person.bibliography %}
           {% for bib_item in person.bibliography %}
-            <a class="bib-search-item search-item" href="{{ person.url | relative_url }}" data-title="{{ bib_item | downcase }}">
+            <a class="bib-search-item search-item" href="{{ person.url | relative_url }}" data-title="{{ bib_item | downcase | escape }}">
               <div class="bib-search-text">{{ bib_item }}</div>
               <div class="bib-search-author">
                 Автор: <strong>{{ person.name }}</strong>
@@ -117,60 +133,59 @@ document.addEventListener("DOMContentLoaded", function() {
   const searchInput = document.getElementById("search-input");
   const tabs = document.querySelectorAll(".search-tab");
   const contents = document.querySelectorAll(".search-content");
-  
+
+  const personFilters = document.getElementById("person-filters");
+  const selects = [...personFilters.querySelectorAll("select")];
+  const personCards = [...document.querySelectorAll("#persons-list .search-item")];
+  const collator = new Intl.Collator("ru");
   let currentTab = "persons-list";
 
-  // Переключение вкладок
+  selects.forEach(select => {
+    const values = new Set(personCards.map(card => card.dataset[select.dataset.filter]).filter(Boolean));
+    [...values].sort(collator.compare).forEach(value => {
+      select.add(new Option(value, value));
+    });
+    select.disabled = values.size === 0;
+    select.addEventListener("change", applySearch);
+  });
+
   tabs.forEach(tab => {
     tab.addEventListener("click", function() {
-      // Убираем активный класс у всех
-      tabs.forEach(t => t.classList.remove("active"));
-      contents.forEach(c => c.classList.remove("active"));
-      
-      // Добавляем активный класс текущей
-      this.classList.add("active");
-      currentTab = this.getAttribute("data-target");
-      document.getElementById(currentTab).classList.add("active");
-      
-      // Вместо очистки просто применяем текущий поисковый запрос к новой вкладке
-      searchInput.dispatchEvent(new Event('input'));
+      currentTab = this.dataset.target;
+      tabs.forEach(item => item.classList.toggle("active", item === this));
+      contents.forEach(content => content.classList.toggle("active", content.id === currentTab));
+      applySearch();
     });
   });
 
-  // Логика поиска
-  searchInput.addEventListener("input", function() {
-    const query = this.value.toLowerCase().trim();
+  searchInput.addEventListener("input", applySearch);
+  document.getElementById("reset-person-filters").addEventListener("click", () => {
+    selects.forEach(select => { select.value = ""; });
+    applySearch();
+  });
+
+  function applySearch() {
+    const query = searchInput.value.toLowerCase().trim();
     const activeContent = document.getElementById(currentTab);
-    const items = activeContent.querySelectorAll(".search-item");
-    const noResultsMsg = activeContent.querySelector(".no-results");
+    const isPersonsTab = currentTab === "persons-list";
+    const activeFilters = isPersonsTab ? selects.filter(select => select.value) : [];
     let visibleCount = 0;
 
-    items.forEach(item => {
-      const title = item.getAttribute("data-title");
-      // Ищем точное вхождение строки (уже приведенной к нижнему регистру в HTML)
-      if (title && title.includes(query)) {
-        item.style.display = ""; // Показываем
-        visibleCount++;
-      } else {
-        item.style.display = "none"; // Скрываем
-      }
+    personFilters.hidden = !isPersonsTab;
+    activeContent.querySelectorAll(".search-item").forEach(item => {
+      const matchesQuery = !query || (item.dataset.title || "").includes(query);
+      const matchesFilters = activeFilters.every(select =>
+        item.dataset[select.dataset.filter] === select.value
+      );
+      const visible = matchesQuery && matchesFilters;
+      item.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
     });
-    
-    // Показываем сообщение, если ничего не найдено
-    if (visibleCount === 0 && query !== "") {
-      noResultsMsg.style.display = "block";
-    } else {
-      noResultsMsg.style.display = "none";
-    }
-  });
 
-  function resetSearch() {
-    const activeContent = document.getElementById(currentTab);
-    const items = activeContent.querySelectorAll(".search-item");
-    const noResultsMsg = activeContent.querySelector(".no-results");
-    
-    items.forEach(item => item.style.display = "");
-    if (noResultsMsg) noResultsMsg.style.display = "none";
+    activeContent.querySelector(".no-results").style.display =
+      visibleCount === 0 && (query || activeFilters.length) ? "block" : "none";
   }
+
+  applySearch();
 });
 </script>

@@ -4,6 +4,8 @@ title: "Нагайцева Людмила Георгиевна"
 name: "Нагайцева Людмила Георгиевна"
 
 author_id: nagaitseva
+degree: "Кандидат наук"
+science_field: "Искусствоведение"
 
 photo: "/assets/images/persons/nagaitseva/portrait.jpeg"
 

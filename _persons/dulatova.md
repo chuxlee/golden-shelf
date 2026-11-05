@@ -4,6 +4,9 @@ title: "Дулатова Анна Николаевна"
 name: "Дулатова Анна Николаевна"
 
 author_id: dulatova
+degree: "Доктор наук"
+science_field: "Педагогические науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/dulatova/portrait.jpg"
 
