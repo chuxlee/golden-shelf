@@ -4,6 +4,9 @@ title: "Гриценко Василий Петрович"
 name: "Гриценко Василий Петрович"
 
 author_id: gricenko
+degree: "Доктор наук"
+science_field: "Философские науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/gricenko/portrait.jpg"
 

@@ -4,6 +4,8 @@ title: "Слуцкий Аркадий Иосифович"
 name: "Слуцкий Аркадий Иосифович"
 
 author_id: sluckiy
+degree: "Кандидат наук"
+science_field: "Педагогические науки"
 
 photo: "/assets/images/persons/sluckiy/portrait.jpg"
 

@@ -4,6 +4,9 @@ title: "Торосян Вардан Григорьевич"
 name: "Торосян Вардан Григорьевич"
 
 author_id: torosyan
+degree: "Доктор наук"
+science_field: "Философские науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/torosyan/portrait.png"
 

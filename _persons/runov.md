@@ -4,6 +4,9 @@ title: "Рунов Владимир Викторович"
 name: "Рунов Владимир Викторович"
 
 author_id: runov
+degree: "Кандидат наук"
+science_field: "Исторические науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/runov/portrait.jpeg"
 

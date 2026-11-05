@@ -4,6 +4,8 @@ title: "Голубева Наталья Леонидовна"
 name: "Голубева Наталья Леонидовна"
 
 author_id: golubeva
+degree: "Доктор наук"
+science_field: "Педагогические науки"
 
 photo: "/assets/images/persons/golubeva/portrait.png"
 

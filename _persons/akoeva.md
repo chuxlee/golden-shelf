@@ -4,6 +4,9 @@ title: "Акоева Наталья Борисовна"
 name: "Акоева Наталья Борисовна"
 
 author_id: akoeva
+degree: "Доктор наук"
+science_field: "Исторические науки"
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/akoeva/portrait.jpeg"
 
