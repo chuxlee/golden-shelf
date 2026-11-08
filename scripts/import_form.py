@@ -106,6 +106,11 @@ def build(row, args, cache, plan, warnings):
         value = field(row, label)
         if value:
             person[key] = value
+<<<<<<< HEAD
+=======
+    if author in args.rector or normalize(field(row, 'Ректор КГИК')) in {'да', 'true', '1'}:
+        person['is_rector'] = True
+>>>>>>> aad3c52ba93fc0b3cd4b0fe952ba15566f9c1626
     titles = numbered(field(row, 'Названия книг'))
     descriptions = numbered(field(row, 'Библиографическое описание книг'))
     annotations = numbered(field(row, 'Анотации к книгам') or field(row, 'Аннотации к книгам'))
@@ -181,6 +186,10 @@ def main():
     parser.add_argument('json_file', type=Path)
     parser.add_argument('--site', type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument('--attachments', type=Path, help='Папка со скачанными вложениями')
+<<<<<<< HEAD
+=======
+    parser.add_argument('--rector', action='append', default=[], metavar='AUTHOR_ID', help='ID ректора, например --rector turavets (можно повторять)')
+>>>>>>> aad3c52ba93fc0b3cd4b0fe952ba15566f9c1626
     parser.add_argument('--download', action='store_true', help='Скачивать недостающие вложения по ссылкам')
     parser.add_argument('--dry-run', action='store_true', help='Проверить импорт без записи')
     args = parser.parse_args()

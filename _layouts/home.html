@@ -47,31 +47,27 @@ layout: default
 
   <!-- СПИСОК ПРЕПОДАВАТЕЛЕЙ -->
   <div id="persons-list" class="search-content active">
-    <div class="person-grid">
-      {% for person in site.persons %}
-      <a class="person-card search-item" href="{{ person.url | relative_url }}" data-title="{{ person.name | downcase | escape }}"
-         data-degree="{{ person.degree | strip | escape }}"
-         data-academic-title="{{ person.academic_title | strip | escape }}"
-         data-science-field="{{ person.science_field | strip | escape }}">
-        <div class="person-card-photo">
-          {% if person.photo %}
-            <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
-          {% else %}
-            <div class="photo-placeholder">{{ person.name | slice: 0 }}</div>
-          {% endif %}
-        </div>
-        <div class="person-card-body">
-          <h2>{{ person.name }}</h2>
-          {% if person.years_at_kgik %}
-            <p class="person-years">{{ person.years_at_kgik }}</p>
-          {% endif %}
-          {% if person.bio_short %}
-            <p class="person-bio">{{ person.bio_short | truncate: 100 }}</p>
-          {% endif %}
-        </div>
-      </a>
-      {% endfor %}
-    </div>
+    {% assign rectors = site.persons | where: "is_rector", true %}
+    {% if rectors.size > 0 %}
+    <section class="person-group" aria-labelledby="rectors-heading">
+      <h2 id="rectors-heading">Ректоры КГИК</h2>
+      <div class="person-grid">
+        {% for person in rectors %}
+          {% include person-card.html %}
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+    <section class="person-group" aria-labelledby="teachers-heading">
+      <h2 id="teachers-heading">Преподаватели</h2>
+      <div class="person-grid">
+        {% for person in site.persons %}
+          {% unless person.is_rector == true %}
+            {% include person-card.html %}
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </section>
     <p id="no-persons-msg" class="no-results" role="status" style="display: none;">Ничего не найдено.</p>
   </div>
 
@@ -180,6 +176,10 @@ document.addEventListener("DOMContentLoaded", function() {
       const visible = matchesQuery && matchesFilters;
       item.style.display = visible ? "" : "none";
       if (visible) visibleCount++;
+    });
+
+    activeContent.querySelectorAll(".person-group").forEach(group => {
+      group.hidden = ![...group.querySelectorAll(".search-item")].some(item => item.style.display !== "none");
     });
 
     activeContent.querySelector(".no-results").style.display =

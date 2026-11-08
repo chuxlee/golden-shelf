@@ -4,6 +4,7 @@ title: "Гриценко Василий Петрович"
 name: "Гриценко Василий Петрович"
 
 author_id: gricenko
+is_rector: true
 degree: "Доктор наук"
 science_field: "Философские науки"
 academic_title: "Профессор"
