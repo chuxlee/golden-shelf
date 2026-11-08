@@ -58,7 +58,7 @@
   display: block;
 }
 .person-card-body { padding: 18px 20px 22px; }
-.person-card-body h2 {
+.person-card-body h3 {
   font-family: var(--font-serif);
   font-size: 1.15rem;
   margin: 0 0 4px;
@@ -275,4 +275,8 @@
 .person-filters button {
   color: var(--accent);
   cursor: pointer;
+}
+
+.person-group + .person-group {
+  margin-top: 40px;
 }
