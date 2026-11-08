@@ -1,0 +1,21 @@
+<a class="person-card search-item" href="{{ person.url | relative_url }}" data-title="{{ person.name | downcase | escape }}"
+         data-degree="{{ person.degree | strip | escape }}"
+         data-academic-title="{{ person.academic_title | strip | escape }}"
+         data-science-field="{{ person.science_field | strip | escape }}">
+        <div class="person-card-photo">
+          {% if person.photo %}
+            <img src="{{ person.photo | relative_url }}" alt="{{ person.name }}">
+          {% else %}
+            <div class="photo-placeholder">{{ person.name | slice: 0 }}</div>
+          {% endif %}
+        </div>
+        <div class="person-card-body">
+          <h3>{{ person.name }}</h3>
+          {% if person.years_at_kgik %}
+            <p class="person-years">{{ person.years_at_kgik }}</p>
+          {% endif %}
+          {% if person.bio_short %}
+            <p class="person-bio">{{ person.bio_short | truncate: 100 }}</p>
+          {% endif %}
+        </div>
+      </a>
