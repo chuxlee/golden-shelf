@@ -7,6 +7,7 @@ bio_short: "Исполняющий обязанности ректора Кра�
 photo: "/assets/images/persons/shadyuk/portrait.webp"
 bibliography: []
 is_rector: true
+rector_order: 5
 media: 
     - type: "image"
       url: "/assets/images/persons/shadyuk/media2.webp"
