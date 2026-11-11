@@ -1,0 +1,32 @@
+.editor { max-width: 1000px; padding: 40px 0 72px; }
+.editor h1, .editor h2, .editor h3 { font-family: var(--font-serif); }
+.editor h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; }
+.editor-eyebrow { color: var(--accent); margin-top: 28px; }
+.editor-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 28px 0; }
+.editor button { font: inherit; cursor: pointer; padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--ink); }
+.editor button:disabled { opacity: .6; cursor: wait; }
+.editor button.editor-primary, .editor-steps [aria-current] { background: var(--accent); color: #fff; border-color: var(--accent); }
+.editor-panel { padding: clamp(16px, 4vw, 32px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.editor [hidden] { display: none !important; }
+.editor label { display: block; font-weight: 600; margin: 20px 0 8px; }
+.editor input:not([type="checkbox"]), .editor textarea, .editor select { display: block; width: 100%; min-width: 0; box-sizing: border-box; padding: 10px 12px; margin-top: 6px; border: 1px solid var(--border); border-radius: 6px; color: var(--ink); background: var(--bg); font: inherit; }
+.editor textarea { resize: vertical; }
+.editor :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.editor-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.editor-help, #draft-status { font-size: .9rem; color: var(--muted); }
+.editor-entry { min-width: 0; margin: 24px 0; padding: 20px; border: 1px solid var(--border); border-radius: 10px; }
+.editor-entry legend { font-size: 1.1rem; font-weight: 700; }
+.editor-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.editor-actions #clear-draft { margin-left: auto; }
+.editor-error { padding: 16px; border: 2px solid var(--accent); background: #fff1f1; }
+.editor img { display: block; max-width: 100%; max-height: 240px; object-fit: contain; margin: 12px 0; }
+.editor-consent { display: flex !important; align-items: start; gap: 10px; }
+.editor-consent input { margin-top: 6px; }
+.editor-review-block { border-bottom: 1px solid var(--border); padding: 12px 0 20px; overflow-wrap: anywhere; }
+.editor-review-text { white-space: pre-wrap; }
+@media (max-width: 680px) {
+  .editor-steps { grid-template-columns: repeat(2, 1fr); }
+  .editor-columns { grid-template-columns: 1fr; gap: 0; }
+  .editor-actions #clear-draft { margin-left: 0; }
+  .editor input[type="file"] { font-size: .85rem; }
+}
