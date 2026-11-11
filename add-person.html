@@ -1,0 +1,95 @@
+---
+layout: default
+title: Добавить преподавателя
+permalink: /add-person/
+sitemap: false
+---
+<link rel="stylesheet" href="{{ '/assets/css/add-person.css' | relative_url }}">
+<section class="container editor" id="person-editor" data-existing="{{ site.persons | map: 'author_id' | jsonify | escape }}">
+  <a href="{{ '/' | relative_url }}">← На выставку</a>
+  <p class="editor-eyebrow">Материалы для книжной выставки</p>
+  <h1>Добавить преподавателя</h1>
+  <p>Заполните сведения, проверьте их и скачайте архив. Передайте его ответственному за выставку для проверки и размещения.</p>
+  <p id="draft-status" role="status">Текстовый черновик сохраняется в этом браузере. После перезагрузки файлы нужно выбрать заново.</p>
+  <noscript>Для заполнения формы включите JavaScript в браузере.</noscript>
+  <nav class="editor-steps" aria-label="Шаги заполнения">
+    <button type="button" data-step="0" aria-current="step">1. Преподаватель</button>
+    <button type="button" data-step="1">2. Книги</button>
+    <button type="button" data-step="2">3. Медиа</button>
+    <button type="button" data-step="3">4. Проверка</button>
+  </nav>
+  <p id="editor-error" class="editor-error" role="alert" hidden></p>
+  <form id="person-form" novalidate>
+    <section class="editor-panel" data-panel="0" aria-labelledby="person-heading">
+      <h2 id="person-heading" tabindex="-1">Сведения о преподавателе</h2>
+      <label>Фамилия, имя, отчество *<input name="name" required autocomplete="off" maxlength="200" placeholder="Иванова Анна Петровна"></label>
+      <label>Идентификатор страницы *<input name="author_id" required pattern="[a-z][a-z0-9_-]*" maxlength="80" aria-describedby="author-id-help"></label>
+      <p id="author-id-help" class="editor-help">Латинские буквы в нижнем регистре, цифры, дефис и подчёркивание. Идентификатор связывает преподавателя с книгами.</p>
+      <button type="button" id="suggest-id">Создать идентификатор по ФИО</button>
+      <label>Краткая биография для карточки *<textarea name="bio_short" required maxlength="500" rows="3"></textarea></label>
+      <label>Полная биография *<textarea name="biography" required rows="10" placeholder="Образование, работа в институте, достижения. Можно использовать Markdown."></textarea></label>
+      <div class="editor-columns">
+        <label>Учёная степень<select name="degree"><option value="">Нет подтверждённых данных</option><option>Кандидат наук</option><option>Доктор наук</option></select></label>
+        <label>Учёное звание<select name="academic_title"><option value="">Нет подтверждённых данных</option><option>Доцент</option><option>Профессор</option><option>Старший научный сотрудник</option></select></label>
+        <label>Отрасль наук<select name="science_field"><option value="">Нет подтверждённых данных</option><option>Педагогические науки</option><option>Исторические науки</option><option>Философские науки</option><option>Искусствоведение</option><option>Филологические науки</option><option>Культурология</option><option>Социологические науки</option><option>Психологические науки</option><option>Экономические науки</option><option>Политические науки</option><option>Юридические науки</option><option>Технические науки</option><option>Физико-математические науки</option><option>Биологические науки</option><option>Географические науки</option><option>Химические науки</option><option>Медицинские науки</option></select></label>
+      </div>
+      <p class="editor-help">Указывайте подтверждённое учёное звание. Должность профессора или доцента кафедры сама по себе его не подтверждает.</p>
+      <label>Годы работы в КГИК<input name="years_at_kgik" placeholder="Например, 1985–2010"></label>
+      <label>Портрет<input type="file" id="portrait" accept="image/jpeg,image/png,image/webp"></label>
+      <div id="portrait-preview"></div>
+      <button type="button" id="clear-portrait">Убрать портрет</button>
+      <label>Полный список работ<textarea name="bibliography" rows="7" placeholder="Одна публикация на строку. Не нужно добавлять номера."></textarea></label>
+    </section>
+    <section class="editor-panel" data-panel="1" aria-labelledby="books-heading" hidden>
+      <h2 id="books-heading" tabindex="-1">Книги и альбомы</h2>
+      <p>Для каждого издания добавьте отдельную карточку. Если книг нет, переходите дальше.</p>
+      <div id="book-entries"></div>
+      <button type="button" id="add-book">+ Добавить книгу</button>
+    </section>
+    <section class="editor-panel" data-panel="2" aria-labelledby="media-heading" hidden>
+      <h2 id="media-heading" tabindex="-1">Медиа и дополнительные материалы</h2>
+      <p>Для фотографий, PDF, аудио и внешних ссылок добавьте отдельные карточки с подписями. Видео можно приложить ссылкой на страницу просмотра.</p>
+      <p class="editor-help">Один файл до 25 МБ, все вложения вместе до 100 МБ. Поддерживаются JPG, PNG, WebP, PDF и MP3.</p>
+      <div id="media-entries"></div>
+      <button type="button" id="add-media">+ Добавить материал</button>
+    </section>
+    <section class="editor-panel" data-panel="3" aria-labelledby="review-heading" hidden>
+      <h2 id="review-heading" tabindex="-1">Проверьте материалы</h2>
+      <p>Ниже показаны тексты и вложения. Разметка Markdown отображается как исходный текст. Итоговое оформление применит сайт.</p>
+      <div id="review"></div>
+      <label class="editor-consent"><input type="checkbox" id="confirmed">Я проверил(а) ФИО, тексты, подписи и соответствие обложек книгам.</label>
+      <button type="button" id="download-archive" class="editor-primary">Скачать ZIP для передачи</button>
+      <p id="download-status" role="status"></p>
+    </section>
+    <div class="editor-actions">
+      <button type="button" id="previous-step">← Назад</button>
+      <button type="button" id="next-step" class="editor-primary">Далее →</button>
+      <button type="button" id="clear-draft">Очистить черновик</button>
+    </div>
+  </form>
+</section>
+<template id="book-template">
+  <fieldset class="editor-entry">
+    <legend>Книга</legend>
+    <label>Название *<input data-key="title" required maxlength="1000"></label>
+    <label>Библиографическое описание *<textarea data-key="description" required rows="4"></textarea></label>
+    <label>Аннотация *<textarea data-key="annotation" required rows="5"></textarea></label>
+    <label>Обложка<input data-file="cover" type="file" accept="image/jpeg,image/png,image/webp"></label>
+    <div data-file-preview></div>
+    <button type="button" data-clear-file>Убрать выбранный файл</button>
+    <button type="button" data-remove>Удалить книгу</button>
+  </fieldset>
+</template>
+<template id="media-template">
+  <fieldset class="editor-entry">
+    <legend>Материал</legend>
+    <label>Тип материала<select data-key="type"><option value="image">Фотография</option><option value="pdf">PDF-документ</option><option value="audio">Аудио MP3</option><option value="link">Внешняя ссылка / видео</option></select></label>
+    <label>Подпись *<textarea data-key="label" required rows="2"></textarea></label>
+    <label data-file-label>Файл *<input data-file="file" type="file" required></label>
+    <label data-url-label hidden>Ссылка *<input data-key="url" type="url" placeholder="https://…"></label>
+    <div data-file-preview></div>
+    <button type="button" data-clear-file>Убрать выбранный файл</button>
+    <button type="button" data-remove>Удалить материал</button>
+  </fieldset>
+</template>
+<script src="{{ '/assets/js/add-person.js' | relative_url }}" defer></script>
