@@ -47,7 +47,7 @@ layout: default
 
   <!-- СПИСОК ПРЕПОДАВАТЕЛЕЙ -->
   <div id="persons-list" class="search-content active">
-    {% assign rectors = site.persons | where: "is_rector", true %}
+    {% assign rectors = site.persons | where: "is_rector", true | sort: "rector_order" %}
     {% if rectors.size > 0 %}
     <section class="person-group" aria-labelledby="rectors-heading">
       <h2 id="rectors-heading">Ректоры КГИК</h2>
