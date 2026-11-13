@@ -3,10 +3,12 @@ layout: "person"
 title: "Шадюк Николай Николаевич"
 name: "Шадюк Николай Николаевич"
 author_id: "shadyuk"
-bio_short: "Исполняющий обязанности ректора Краснодарского государственного университета культуры и искусств (2010–2013), заслуженный артист Кубани, директор Кубанского симфонического оркестра."
+bio_short: "Заслуженный артист Кубани, директор Кубанского симфонического оркестра."
 photo: "/assets/images/persons/shadyuk/portrait.webp"
 bibliography: []
 is_rector: true
+rector_years: "2010–2013"
+rector_role: "И. о. ректора"
 rector_order: 5
 media: 
     - type: "image"
