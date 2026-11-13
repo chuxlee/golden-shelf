@@ -11,6 +11,9 @@
         </div>
         <div class="person-card-body">
           <h3>{{ person.name }}</h3>
+          {% if person.is_rector == true and person.rector_years != blank %}
+            <p class="rector-term"><span class="rector-term-label">{{ person.rector_role | default: "Ректор" | escape }}</span><strong>{{ person.rector_years | escape }}</strong></p>
+          {% endif %}
           {% if person.years_at_kgik %}
             <p class="person-years">{{ person.years_at_kgik }}</p>
           {% endif %}
