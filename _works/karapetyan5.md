@@ -1,5 +1,5 @@
 ---
-title: "Основы музеологии : учебно-методическое пособие для бакалавров..."
+title: "Основы музеологии : учебно-методическое пособие для бакалавров"
 author_id: karapetyan
 cover: "/assets/images/persons/karapetyan/book5.jpg"
 ---

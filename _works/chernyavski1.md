@@ -1,7 +1,7 @@
 ---
 title: "«Народные мелодии Кубани для юношества: фортепиано» (2021)"
 author_id: chernyavski
-cover: "/assets/images/persons/chernyavski/book1.jpg"
+cover: "/assets/images/persons/chernyavski/book1.jpeg"
 ---
 
 ## Библиографическое описание

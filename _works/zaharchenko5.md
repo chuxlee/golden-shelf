@@ -3,7 +3,7 @@ title: "Народные песни Кубани. Вып. 2. Песни черн
 
 author_id: zaharchenko
 
-cover: "/assets/images/persons/zaharchenko/book5.ifif"
+cover: "/assets/images/persons/zaharchenko/book5.jfif"
 
 ---
 

@@ -3,7 +3,7 @@ title: "Эмоциональное и рациональное в научном
 
 author_id: gricenko
 
-cover: "/assets/images/persons/gricenko/book9-cover.png"
+cover: "/assets/images/persons/gricenko/book6-cover.png"
 
 ---
 
