@@ -2,6 +2,7 @@
 title: "Аполлонов Александр Алексеевич"
 name: "Аполлонов Александр Алексеевич"
 author_id: "apollonov"
+academic_title: "Профессор"
 degree: ""
 science_field: ""
 photo: "/assets/images/persons/apollonov/portrait.png"

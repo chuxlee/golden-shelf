@@ -2,6 +2,7 @@
 title: "Журавлева-Пономаренко Вероника Ивановна"
 name: "Журавлева-Пономаренко Вероника Ивановна"
 author_id: "juravleva-ponomarenko"
+academic_title: "Профессор"
 degree: ""
 science_field: ""
 photo: "/assets/images/persons/juravleva-ponomarenko/portrait.jpg"

@@ -4,6 +4,8 @@ title: "Денисов Николай Григорьевич"
 name: "Денисов Николай Григорьевич"
 
 author_id: denisov
+science_field: "Философские науки"
+degree: "Доктор наук"
 
 photo: "/assets/images/persons/denisov/portrait.jpg"
 

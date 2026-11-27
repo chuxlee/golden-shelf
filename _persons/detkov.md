@@ -3,6 +3,7 @@ layout: "person"
 title: "Детков Владимир Иванович"
 name: "Детков Владимир Иванович"
 author_id: "detkov"
+academic_title: "Профессор"
 photo: "/assets/images/persons/detkov/portrait.jpg"
 bio_short: "Заслуженный работник культуры РФ, профессор, декан факультета «Консерватория» КГИК, баянист с педагогическим стажем более 46 лет"
 

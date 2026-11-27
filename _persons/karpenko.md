@@ -4,6 +4,9 @@ title: "Карпенко Виктор Николаевич "
 name: "Карпенко Виктор Николаевич "
 
 author_id: karpenko
+academic_title: "Профессор"
+science_field: "Педагогические науки"
+degree: "Кандидат наук"
 
 
 photo: "/assets/images/persons/karpenko/portrait.webp"
