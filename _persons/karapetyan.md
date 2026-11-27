@@ -4,6 +4,7 @@ title: "Карапетян Лев Александрович"
 name: "Карапетян Лев Александрович"
 
 author_id: karapetyan
+academic_title: "Профессор"
 degree: "Доктор наук"
 science_field: "Исторические науки"
 

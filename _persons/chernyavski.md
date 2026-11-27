@@ -4,6 +4,7 @@ title: "Чернявский Владимир  Андреевич"
 name: "Чернявский Владимир  Андреевич"
 
 author_id: chernyavski
+academic_title: "Профессор"
 
 photo: "/assets/images/persons/chernyavski/portrait.jpg"
 

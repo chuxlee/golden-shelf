@@ -2,6 +2,7 @@
 title: "Горгуль Анатолий Сергеевич"
 name: "Горгуль Анатолий Сергеевич"
 author_id: "gorgul"
+academic_title: "Профессор"
 degree: ""
 science_field: ""
 photo: "/assets/images/persons/gorgul/portrait.jpg"

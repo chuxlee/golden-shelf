@@ -2,8 +2,8 @@
 title: "Мартиросян Карен Минасович"
 name: "Мартиросян Карен Минасович"
 author_id: "martirosyan"
-degree: ""
-science_field: ""
+degree: "Доктор наук"
+science_field: "Философские науки"
 photo: "/assets/images/persons/martirosyan/portrait.jpg"
 bio_short: "Доктор философских наук, кандидат исторических наук, доцент. Декан факультета гуманитарного образованияКраснодарского государственного института культуры"
 media: 
@@ -31,6 +31,7 @@ bibliography:
   - "Павлова О. А., Мартиросян К. М., Кондратьева Л. Н. Писательский проект Пролеткульта 1918–1921 годов как креативная утопия // Научный диалог. — 2025. — Т. 14. — № 10. — С. 349–369. URL: https://cyberleninka.ru/article/n/pisatelskiy-proekt-proletkulta-1918-1921-godov-kak-kreativnaya-utopiya"
   - "Мартиросян К. М., Юркова Е. М. Тенденция индивидуального творчества в киберпространстве // Вестник Кемеровского государственного университета культуры и искусств. — 2022. — № 59. — С. 26–31. URL: https://cyberleninka.ru/article/n/tendentsiya-individualnogo-tvorchestva-v-kiberprostranstve"
   - "Мартиросян К. М., Ковальчук О. Г. Изучение культурных трансформаций в цифровую эпоху // Вестник КГИК. — 2026. — № 2 (47). URL: https://s.esrae.ru/vestnikkguki/pdf/2026/2(47)/661.pdf"
+academic_title: "Доцент"
 ---
 
 ## Образование

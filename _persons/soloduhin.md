@@ -2,8 +2,8 @@
 title: "Солодухин Леонтий Алексеевич"
 name: "Солодухин Леонтий Алексеевич"
 author_id: "soloduhin"
-degree: ""
-science_field: ""
+degree: "Кандидат наук"
+science_field: "Исторические науки"
 photo: "/assets/images/persons/soloduhin/portrait.png"
 bio_short: "Кандидат исторических наук, профессор."
 
@@ -12,6 +12,7 @@ rector_years: "1983–1991"
 rector_order: 2
 
 
+academic_title: "Профессор"
 ---
 
 ## Образование

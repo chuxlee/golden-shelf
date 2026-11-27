@@ -93,6 +93,9 @@ media:
 
 
   
+degree: "Доктор наук"
+science_field: "Искусствоведение"
+academic_title: "Профессор"
 ---
 
 ## Биография
